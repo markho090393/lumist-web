@@ -23,9 +23,7 @@ export default defineConfig({
     vue(),
     UnoCSS(),
     AutoImport({
-      resolvers: [
-        ArcoResolver(),
-      ],
+      resolvers: [ArcoResolver()],
     }),
     Components({
       // 生成全局组件类型声明文件，提升DX

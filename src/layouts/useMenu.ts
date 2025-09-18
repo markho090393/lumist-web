@@ -18,21 +18,19 @@ const normalizePath = (parent: string, child: string) => {
 const isMenuRoute = (r: RouteRecordRaw) => Boolean((r.meta as any)?.isMenu)
 
 const buildMenu = (items: RouteRecordRaw[], parentPath = '/'): MenuNode[] => {
-  return items
-    .filter(isMenuRoute)
-    .map((r) => {
-      const path = normalizePath(parentPath, r.path)
-      const node: MenuNode = {
-        path,
-        title: ((r.meta as any)?.title as string) || (r.name as string) || path,
-        icon: ((r.meta as any)?.icon as string) || undefined,
-      }
-      if (r.children && r.children.length) {
-        const children = buildMenu(r.children, path)
-        if (children.length) node.children = children
-      }
-      return node
-    })
+  return items.filter(isMenuRoute).map((r) => {
+    const path = normalizePath(parentPath, r.path)
+    const node: MenuNode = {
+      path,
+      title: ((r.meta as any)?.title as string) || (r.name as string) || path,
+      icon: ((r.meta as any)?.icon as string) || undefined,
+    }
+    if (r.children && r.children.length) {
+      const children = buildMenu(r.children, path)
+      if (children.length) node.children = children
+    }
+    return node
+  })
 }
 
 export function useMenu() {

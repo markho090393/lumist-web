@@ -19,10 +19,7 @@ export default defineConfig({
     presetAttributify(),
     presetTagify(),
     presetTypography(),
-    presetWebFonts()
+    presetWebFonts(),
   ],
-  transformers: [
-    transformerDirectives(),
-    transformerVariantGroup(),
-  ],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 })

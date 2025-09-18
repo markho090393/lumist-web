@@ -1,9 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
   "files": {
-    "includes": [
-      "**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,json,css,html,graphql}"
-    ],
+    "includes": ["**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,json,css,html,graphql}"],
     "ignoreUnknown": true,
     "maxSize": 1048576
   },
@@ -14,20 +12,14 @@
   },
   "formatter": {
     "enabled": true,
-    "includes": [
-      "**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,json,css,html,graphql}",
-      "!**/*.d.ts"
-    ],
+    "includes": ["**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,json,css,html,graphql}", "!**/*.d.ts"],
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 100
   },
   "linter": {
     "enabled": true,
-    "includes": [
-      "**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,css,graphql}",
-      "!**/*.d.ts"
-    ],
+    "includes": ["**/*.{js,jsx,mjs,cjs,ts,tsx,cts,mts,css,graphql}", "!**/*.d.ts"],
     "rules": {
       "recommended": true,
       "nursery": {
