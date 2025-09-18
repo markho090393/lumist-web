@@ -19,6 +19,18 @@ export const routes: RouteRecordRaw[] = [
                     isMenu: true
                 }
             },
+            // 与首页同级的隐藏页面：路径为 /home/word-training，但不作为菜单项
+            {
+                path: 'home/word-training',
+                name: 'home-word-training',
+                component: () => import('@/views/Home/WordTrainings.vue'),
+                meta: {
+                    title: '单词训练',
+                    isMenu: false,
+                    // 指定菜单选中回退到首页
+                    menuActivePath: '/home'
+                }
+            },
             {
                 path: 'profile',
                 name: 'profile',

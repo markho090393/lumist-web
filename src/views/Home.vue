@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 // 练习中心卡片数据
 type PracticeCard = {
@@ -53,11 +54,11 @@ const quickList: QuickItem[] = [
 // 仪表盘相关（简洁 SVG 实现）
 type Sector = { start: number; end: number; color: string; label: string }
 const sectors: Sector[] = [
-  { start: -180, end: -144, color: '#1F6B5B', label: 'E' },
-  { start: -144, end: -108, color: '#1A5F51', label: 'D' },
-  { start: -108, end: -72, color: '#165549', label: 'C' },
-  { start: -72, end: -36, color: '#124B40', label: 'B' },
-  { start: -36, end: 0, color: '#0E4138', label: 'A' },
+  { start: -180, end: -144, color: 'rgba(var(--primary-6), 0.95)', label: 'E' },
+  { start: -144, end: -108, color: 'rgba(var(--primary-6), 0.85)', label: 'D' },
+  { start: -108, end: -72, color: 'rgba(var(--primary-6), 0.75)', label: 'C' },
+  { start: -72, end: -36, color: 'rgba(var(--primary-6), 0.65)', label: 'B' },
+  { start: -36, end: 0, color: 'rgba(var(--primary-6), 0.55)', label: 'A' },
 ]
 
 const polar = (angleDeg: number, r: number) => {
@@ -91,6 +92,14 @@ const letterPositions = computed(() =>
 const grade = 'A'
 const learned = 81
 const notLearned = 321
+
+const router = useRouter()
+const onPracticeCardClick = (label: string, idx: number) => {
+  // 仅“单词训练”跳转子路由，其余保留
+  if (label === '单词训练' || idx === 0) {
+    router.push('/home/word-training')
+  }
+}
 </script>
 
 <template>
@@ -106,14 +115,15 @@ const notLearned = 321
               v-for="(item, idx) in practiceCards"
               :key="idx"
               class="rounded-3xl h-36 p-6 text-white relative overflow-hidden shadow-sm"
-              :class="item.gradient"
+              :class="[item.gradient, idx === 0 ? 'cursor-pointer hover:shadow-md transition-shadow' : '']"
+              @click="onPracticeCardClick(item.label, idx)"
             >
               <div class="flex flex-col h-full justify-between">
                 <div class="text-[28px] font-700 leading-none">{{ item.value }}</div>
                 <div class="text-[14px] opacity-90">{{ item.label }}</div>
               </div>
               <div
-                class="absolute right-4 top-4 w-12 h-12 rounded-2xl bg-white/80 text-[#0E4138] flex items-center justify-center shadow"
+                class="absolute right-4 top-4 w-12 h-12 rounded-2xl bg-white/80 text-[rgb(var(--primary-6))] flex items-center justify-center shadow"
               >
                 <i :class="item.icon + ' text-20'" />
               </div>
@@ -166,7 +176,7 @@ const notLearned = 321
         <section class="bg-white rounded-3xl p-6 shadow-sm">
           <div class="flex items-center justify-center">
             <div class="w-[72px] h-[72px] rounded-full overflow-hidden bg-[#EAF3FF] flex items-center justify-center">
-              <i class="i-ph:user-duotone text-[24px] text-[#1F6B5B]" />
+              <i class="i-ph:user-duotone text-[24px] text-[rgb(var(--primary-6))]" />
             </div>
           </div>
           <div class="text-center mt-4">
@@ -243,5 +253,6 @@ const notLearned = 321
         </section>
       </div>
     </div>
+
   </div>
 </template>

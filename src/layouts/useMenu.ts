@@ -57,6 +57,21 @@ export function useMenu() {
     return res
   })
 
+  // 仅包含在菜单中作为分组存在的路径
+  const allGroupKeys = computed<string[]>(() => {
+    const res: string[] = []
+    const walk = (nodes: MenuNode[]) => {
+      nodes.forEach((n) => {
+        if (n.children && n.children.length) {
+          res.push(n.path)
+          walk(n.children)
+        }
+      })
+    }
+    walk(menuTree.value)
+    return res
+  })
+
   const updateMenuState = () => {
     // 将 matched 记录转为绝对路径链（排除根 '/')
     const absChain: string[] = []
@@ -73,11 +88,39 @@ export function useMenu() {
     const toLeafKey = (p: string) => `leaf:${p}`
     const toGroupKey = (p: string) => `group:${p}`
 
-    // 叶子：仅展开父级；非叶子：自身也展开
-    const groupChain = isLeaf ? absChain.slice(0, -1) : absChain
+    // 仅展开真正存在的分组
+    const groupChain = (isLeaf ? absChain.slice(0, -1) : absChain).filter((p) =>
+      allGroupKeys.value.includes(p),
+    )
     openKeys.value = groupChain.map(toGroupKey)
 
-    selectedKeys.value = isLeaf ? [toLeafKey(currentPath)] : []
+    // 子路由时，选择离当前最近的叶子（用于 /home/word-training 选中 /home）
+    if (isLeaf) {
+      selectedKeys.value = [toLeafKey(currentPath)]
+    } else {
+      // 1) 优先使用 matched 链中的最近叶子
+      let nearest = [...absChain].reverse().find((p) => allLeafKeys.value.includes(p))
+
+      // 2) 其次回退到路径前缀中最近的叶子（如 /home/word-training -> /home）
+      if (!nearest) {
+        const segments = route.path.split('/').filter(Boolean)
+        const prefixes: string[] = []
+        let acc = ''
+        for (const seg of segments) {
+          acc += '/' + seg
+          prefixes.push(acc)
+        }
+        nearest = prefixes.reverse().find((p) => allLeafKeys.value.includes(p))
+      }
+
+      // 3) 最后如果路由定义提供了显式菜单激活路径，则按之选中
+      if (!nearest) {
+        const forced = ((route.meta as any)?.menuActivePath as string) || ''
+        if (forced && allLeafKeys.value.includes(forced)) nearest = forced
+      }
+
+      selectedKeys.value = nearest ? [toLeafKey(nearest)] : []
+    }
   }
 
   watch(() => route.fullPath, updateMenuState, { immediate: true })

@@ -1,3 +1,12 @@
+/*
+  统一主题色设计（移除历史主题色实现）
+  - 默认主色 primary: #359186
+  - 采用 rgb 三元值变量，兼容 Arco 的 `rgb(var(--primary-6))` 写法
+  - 提供 1~10 档深浅阶梯，便于 hover/active 等状态使用
+  - 额外提供十六进制变量 --theme-primary 供通用使用
+*/
+/* 全局尺寸/基础样式，仅保留必要 reset，主题色由 Arco Less modifyVars 生成 */
+
 html, body, #app {
     height: 100%;
     width: 100%;
