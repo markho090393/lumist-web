@@ -97,16 +97,16 @@ const start = () => {
           <a-button
             size="small"
             shape="round"
-            class="!h-8 !px-4 !rounded-md"
+            class="h-8 px-3 rounded"
             :class="
               item.answer === 'yes'
                 ? 'bg-[#16A34A] !border-0 text-white'
-                : '!bg-white !text-[#6B7280] !border !border-[#E5E7EB]'
+                : 'bg-white text-[#6B7280] border border-[#E5E7EB]'
             "
             @click="setAnswer(item, 'yes')"
           >
             <span class="inline-flex items-center gap-1">
-              <i v-if="item.answer === 'yes'" class="i-ph:check-circle-fill" />
+              <div v-if="item.answer === 'yes'" class="i-ph:check-circle-fill text-lg" />
               Yes
             </span>
           </a-button>
@@ -115,7 +115,7 @@ const start = () => {
           <a-button
             size="small"
             shape="round"
-            class="!h-8 !px-4 !rounded-md"
+            class="h-8 px-3 rounded"
             :class="
               item.answer === 'no'
                 ? 'bg-[#F97316] !border-0 text-white'
@@ -124,7 +124,7 @@ const start = () => {
             @click="setAnswer(item, 'no')"
           >
             <span class="inline-flex items-center gap-1">
-              <i v-if="item.answer === 'no'" class="i-ph:x-circle-fill" />
+              <div v-if="item.answer === 'no'" class="i-ph:x-circle-fill text-lg" />
               No
             </span>
           </a-button>
