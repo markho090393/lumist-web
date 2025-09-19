@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import LearnPracticeModal from './components/LearnPracticeModal.vue'
+import WordExpandModal from './components/WordExpandModal.vue'
 
 type CardPhase = 0 | 1 | 2 // 0: 默认, 1: 显示音标/标记, 2: 显示释义
 
@@ -63,6 +64,7 @@ const onClickSpell = (item?: WordItem) => {
 
 const onClickExpand = (item?: WordItem) => {
   if (item) item.phase = 2
+  openExpandModal(item)
 }
 
 const currentPage = ref(1)
@@ -85,6 +87,17 @@ const openLearnModal = (item?: WordItem) => {
   modal.ipa = item?.ipa || ''
   modal.meaning = item?.meaning || ''
   learnVisible.value = true
+}
+
+// 单词拓展弹窗
+const expandVisible = ref(false)
+const expand = reactive<{ word: string; ipa?: string; meaning?: string }>({ word: '' })
+const openExpandModal = (item?: WordItem) => {
+  const useWord = item?.text || queryWord.value
+  expand.word = useWord
+  expand.ipa = item?.ipa || ''
+  expand.meaning = item?.meaning || ''
+  expandVisible.value = true
 }
 </script>
 
@@ -179,6 +192,9 @@ const openLearnModal = (item?: WordItem) => {
 
   <!-- 学练一体弹窗 -->
   <LearnPracticeModal v-model="learnVisible" :word="modal.word" :ipa="modal.ipa || undefined" :meaning="modal.meaning || undefined" />
+
+  <!-- 单词拓展弹窗 -->
+  <WordExpandModal v-model="expandVisible" :word="expand.word" :ipa="expand.ipa || undefined" :meaning="expand.meaning || undefined" />
 </template>
 
 <style scoped>

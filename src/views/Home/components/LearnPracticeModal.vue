@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 // 学练一体弹窗
 // - v-model 控制可见性
@@ -69,6 +69,17 @@ watch(
   { immediate: true },
 )
 
+// 打开弹窗时重置至步骤一（或传入的 initialStep）
+watch(
+  visible,
+  (val) => {
+    if (val) {
+      step.value = props.initialStep ?? 1
+      resetStep2()
+    }
+  },
+)
+
 const canSubmit = computed(() => inputVal.value.length === (props.word?.length || 0))
 const isCorrect = computed(() => inputVal.value.toLowerCase() === (props.word || '').toLowerCase())
 
@@ -90,7 +101,7 @@ const close = () => (visible.value = false)
     :mask-closable="true"
     :render-to-body="false"
     :body-style="{ padding: '16px 20px 20px 20px' }"
-    :modal-style="{ borderRadius: '16px' }"
+    :modal-style="{ borderRadius: '16px', backgroundColor: '#F3F3F3' }"
     @cancel="close"
   >
     <template #title>
@@ -98,8 +109,8 @@ const close = () => (visible.value = false)
     </template>
 
     <!-- 步骤条 -->
-    <div class="rounded-xl bg-[#F6F7F9] px-8 py-4 mb-4">
-      <a-steps :current="step - 1" size="small">
+    <div class="rounded-xl bg-white px-8 py-4 mb-4">
+      <a-steps :current="step" size="small" label-placement="vertical">
         <a-step title="拆分拼写" />
         <a-step title="字母拼写" />
       </a-steps>
@@ -217,4 +228,3 @@ const close = () => (visible.value = false)
   font-weight: 600;
 }
 </style>
-
