@@ -12,7 +12,7 @@ export const routes: RouteRecordRaw[] = [
        {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/Home/index.vue'),
         meta: {
           title: '首页',
           icon: 'home',
@@ -27,6 +27,29 @@ export const routes: RouteRecordRaw[] = [
           title: '我的学习',
           icon: 'study',
           isMenu: true,
+        },
+      },
+      // 与“我的学习”同级的隐藏子页面：不进入菜单，不影响父级内容
+      {
+        path: 'my-study/review',
+        name: 'my-study-review',
+        component: () => import('@/views/MyStudy/AfterReview.vue'),
+        meta: {
+          title: '课后复习',
+          isMenu: false,
+          // 使侧边栏回退选中“我的学习”
+          menuActivePath: '/my-study',
+        },
+      },
+      // “复习词库”隐藏子页面：路径 /my-study/review-words
+      {
+        path: 'my-study/review-words',
+        name: 'my-study-review-words',
+        component: () => import('@/views/MyStudy/ReviewWordBank.vue'),
+        meta: {
+          title: '复习词库',
+          isMenu: false,
+          menuActivePath: '/my-study',
         },
       },
       // 与首页同级的隐藏页面：路径为 /home/word-training，但不作为菜单项

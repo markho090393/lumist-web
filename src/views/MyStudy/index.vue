@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 type Metric = { icon: string; label: string; value: string; sub?: string }
 const metrics = ref<Metric[]>([
@@ -16,6 +17,7 @@ type Card = {
   btnText: string
   badgeRight?: string
   subline?: string
+  route?: string
 }
 
 const studyCards = ref<Card[]>([
@@ -25,7 +27,8 @@ const studyCards = ref<Card[]>([
     color: '#8B5CF6',
     btnText: '开始复习',
     subline: '今日复习词数：0/92',
-    badgeRight: '0%'
+    badgeRight: '0%',
+    route: '/my-study/review-words',
   },
   {
     title: '短语复习',
@@ -76,6 +79,11 @@ const colorAlpha = (hex: string, alpha: number) => {
   const b = bigint & 255
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
+
+const router = useRouter()
+const go = (route?: string) => {
+  if (route) router.push(route)
+}
 </script>
 
 <template>
@@ -124,6 +132,7 @@ const colorAlpha = (hex: string, alpha: number) => {
               long
               shape="round"
               :style="{ backgroundColor: colorAlpha(c.color, 0.95), color: '#fff', border: 'none', height: '40px' }"
+              @click="go(c.route)"
             >{{ c.btnText }}</a-button>
           </div>
         </div>
