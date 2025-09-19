@@ -9,13 +9,23 @@ export const routes: RouteRecordRaw[] = [
         path: '',
         redirect: '/home',
       },
-      {
+       {
         path: 'home',
         name: 'home',
         component: () => import('@/views/Home.vue'),
         meta: {
           title: '首页',
           icon: 'home',
+          isMenu: true,
+        },
+      },
+      {
+        path: 'my-study',
+        name: 'my-study',
+        component: () => import('@/views/MyStudy/index.vue'),
+        meta: {
+          title: '我的学习',
+          icon: 'study',
           isMenu: true,
         },
       },

@@ -85,7 +85,7 @@ const start = () => {
       <div
         v-for="item in displayList"
         :key="item.id"
-        class="rounded-xl bg-[#F6F7F9] border border-white px-4 h-16 flex items-center justify-between"
+        class="rounded-xl bg-[#F3F3F3] border border-white px-4 h-16 flex items-center justify-between"
       >
         <div class="flex items-baseline gap-3">
           <div :class="['text-[20px]', item.strong ? 'font-700' : 'font-500']">{{ item.word }}</div>
