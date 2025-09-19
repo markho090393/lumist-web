@@ -42,6 +42,17 @@ export const routes: RouteRecordRaw[] = [
           menuActivePath: '/home',
         },
       },
+      // 新增：单词识记页（首页子路由，隐藏菜单）
+      {
+        path: 'home/word-memorize',
+        name: 'home-word-memorize',
+        component: () => import('@/views/Home/WordMemorize.vue'),
+        meta: {
+          title: '单词识记',
+          isMenu: false,
+          menuActivePath: '/home',
+        },
+      },
       {
         path: 'profile',
         name: 'profile',
