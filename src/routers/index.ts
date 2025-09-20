@@ -9,7 +9,7 @@ export const routes: RouteRecordRaw[] = [
         path: '',
         redirect: '/home',
       },
-       {
+      {
         path: 'home',
         name: 'home',
         component: () => import('@/views/Home/index.vue'),
@@ -82,6 +82,17 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/Home/WordMemorize.vue'),
         meta: {
           title: '单词识记',
+          isMenu: false,
+          menuActivePath: '/home',
+        },
+      },
+      // 新增：词汇量检测（首页子路由，隐藏菜单）
+      {
+        path: 'home/vocab-test',
+        name: 'home-vocab-test',
+        component: () => import('@/views/Home/VocabTest.vue'),
+        meta: {
+          title: '词汇量检测',
           isMenu: false,
           menuActivePath: '/home',
         },

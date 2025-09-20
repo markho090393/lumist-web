@@ -29,5 +29,6 @@ declare module 'vue' {
     ATag: typeof import('@arco-design/web-vue')['Tag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    WordCardList: typeof import('./components/business/WordCardList.vue')['default']
   }
 }

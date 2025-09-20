@@ -12,7 +12,7 @@ const centerList: CenterItem[] = [
   { zh: '单词训练', en: 'Word training', from: '#9AD3FF', to: '#D6EAFF', icon: 'i-ph:letter-a-bold', route: '/home/word-training', fill: '#E6F6FF' },
   { zh: '抗遗忘', en: 'Anti forgetting', from: '#FFE27D', to: '#FFF1BF', icon: 'i-ph:lightbulb-filament', fill: '#FFFBE7' },
   { zh: '遗忘强化', en: 'Forgetting reinforcement', from: '#D9CCFF', to: '#EEE9FF', icon: 'i-ph:check-circle', fill: '#F3EEFF' },
-  { zh: '词汇量检测', en: 'Vocabulary testing', from: '#B8F1D8', to: '#E6FFF4', icon: 'i-ph:chat-centered-dots', fill: '#EAFFF7' },
+  { zh: '词汇量检测', en: 'Vocabulary testing', from: '#B8F1D8', to: '#E6FFF4', icon: 'i-ph:chat-centered-dots', route: '/home/vocab-test', fill: '#EAFFF7' },
 ]
 
 // 快速练习
