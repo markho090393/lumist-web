@@ -26,6 +26,7 @@ declare module 'vue' {
     ASteps: typeof import('@arco-design/web-vue')['Steps']
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     ATable: typeof import('@arco-design/web-vue')['Table']
+    ATableColumn: typeof import('@arco-design/web-vue')['TableColumn']
     ATag: typeof import('@arco-design/web-vue')['Tag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -52,6 +52,72 @@ export const routes: RouteRecordRaw[] = [
           menuActivePath: '/my-study',
         },
       },
+      // 新增：听音辨词（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/listen-word',
+        name: 'my-study-listen-word',
+        component: () => import('@/views/MyStudy/ListenWordPractice.vue'),
+        meta: {
+          title: '听音辨词',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
+      // 新增：拼写训练（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/spell-training',
+        name: 'my-study-spell-training',
+        component: () => import('@/views/MyStudy/SpellingTraining.vue'),
+        meta: {
+          title: '拼写训练',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
+      // 新增：闯关统计（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/pass-stats',
+        name: 'my-study-pass-stats',
+        component: () => import('@/views/MyStudy/PassStats.vue'),
+        meta: {
+          title: '闯关统计',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
+      // 新增：短语复习（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/phrase-review',
+        name: 'my-study-phrase-review',
+        component: () => import('@/views/MyStudy/PhraseReview.vue'),
+        meta: {
+          title: '短语复习',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
+      // 新增：语法复习（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/grammar-review',
+        name: 'my-study-grammar-review',
+        component: () => import('@/views/MyStudy/GrammarReview.vue'),
+        meta: {
+          title: '语法复习',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
+      // 新增：阅读复习（我的学习 子路由，隐藏菜单）
+      {
+        path: 'my-study/reading-review',
+        name: 'my-study-reading-review',
+        component: () => import('@/views/MyStudy/ReadingReview.vue'),
+        meta: {
+          title: '阅读复习',
+          isMenu: false,
+          menuActivePath: '/my-study',
+        },
+      },
       // 与首页同级的隐藏页面：路径为 /home/word-training，但不作为菜单项
       {
         path: 'home/word-training',
